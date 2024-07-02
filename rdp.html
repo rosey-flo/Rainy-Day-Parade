@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+    <link href="./css/rdp.css">
     <title>Rainy Day Parade</title>
 </head>
+
 <body>
+    <!--NAVAGATION SECTION: INCLUDES THE BACK BUTTON-->
     <nav>
         <button>arrow back</button>
-            <p>Check out another city</p>
+        <p>Check out another city</p>
     </nav>
+    <!--MAIN HEADER: INCLUDES DISPLAYED CHOSEN DESIRED CITY-->
     <h1>Your Chosen City:</h1>
+    <!--WEATHER REPORT:-->
     <div>
         <h2>Weather Report:</h2>
+        <p class="month-wr"></p>
+    </div>
+    <!--THIS AREA WILL BE THE TICKETMASER OUTPUT FOR EVENTS BASED ON CHOSEN CRITERIA-->
+    <div class="containers">
+        <div>
+            <h2>Best events for you this week:</h2>
+            <p class="tm=output"></p>
+        </div>
+
+        <div>
+            <h2>Save these for next week:</h2>
+            <p class="tm=output"></p>
+        </div>
+
+        <div>
+            <h2>Only Indoor for this Month:</h2>
+            <p class="tm=output"></p>
+        </div>
     </div>
 
-    <div>
-        Results:
-    </div>
-    
-    <div>
-        Results:
-    </div>
-    <div>
-        Results:
-    </div>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script href="./js/rdp.js"></script>
 </body>
+
 </html>
