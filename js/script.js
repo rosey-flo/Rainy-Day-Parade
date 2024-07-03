@@ -1,3 +1,68 @@
+
+
+const $submitBtn = $('#submit-btn');
+
+function getCities () {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    return cities;
+}
+
+function storeCity (eventObj) {
+    eventObj.preventDefault();
+
+    //grab each input element
+
+    const inputEl = $('#city-input');
+
+    //get the value of each input
+
+    const cityVal = inputEl.val();
+
+    //create an object that has each value and date 
+
+    const cityObj = {
+        city: cityVal
+    };
+    
+
+    //pull old data from local or have empty array
+
+    const cities = getCities();
+
+    //push the blogs obj to the blogs array then convert to JSON
+
+    cities.push(cityObj);
+    const jsonArray = JSON.stringify(cities);
+
+    //save the blogs array to the local storage
+    
+
+    localStorage.setItem('cities', jsonArray);
+
+    //reset form values
+
+    
+    window.location = "./rdp.html";
+
+    
+
+    
+}
+
+$submitBtn.on('click', storeCity);
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function() {
     // Functions to open and close a modal
     function openModal($el) {
@@ -22,6 +87,7 @@ $(document).ready(function() {
   
       $('.js-modal-trigger').on('click', function() {
         openModal($target);
+        $('.start-btn').addClass('hide');
       });
     });
    
@@ -31,6 +97,7 @@ $(document).ready(function() {
   
       $(this).on('click', function() {
         closeModal($target);
+        $('.start-btn').removeClass('hide');
       });
     });
   
