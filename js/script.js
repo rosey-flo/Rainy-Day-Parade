@@ -12,6 +12,7 @@ $(document).ready(function() {
       $('.modal').each(function() {
         closeModal($(this));
       });
+    //how to position? It opens, but stuck on upper left side.
     }
   
     // Add a click event on buttons to open a specific modal
