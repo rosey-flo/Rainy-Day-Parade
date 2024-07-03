@@ -13,15 +13,18 @@ function storeCity (eventObj) {
     //grab each input element
 
     const inputEl = $('#city-input');
+    const genreInput = $('.genre-input');
 
     //get the value of each input
 
     const cityVal = inputEl.val();
+    const genreVal = genreInput.val();
 
     //create an object that has each value and date 
 
     const cityObj = {
-        city: cityVal
+        city: cityVal,
+        genre: genreVal
     };
     
 

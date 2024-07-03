@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rainy Day Parade</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    
-  </head>
-  <body>
 
-    <!-----Modal HTML------>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rainy Day Parade</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+  <link rel="stylesheet" href="./css/style.css">
 
-    <div class="modal text-center" id="modal">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <!-- Any other Bulma elements you want -->
-         <h2 class="modal-title is-size-1 has-text-white mb-5">Please enter a city:</h2>
-        <div class="control">
-          <input id="city-input" class="input px-4" type="text" placeholder="Normal input" />
-        </div>
-        <button id="submit-btn" class="modal-submit-btn button is-large is-primary mt-6">Submit</button>
+</head>
 
+<body>
+
+  <!-----Modal HTML------>
+
+  <div class="modal text-center box" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content is-flex is-flex-direction-column">
+      <!-- Any other Bulma elements you want -->
+      <h2 class="modal-title is-size-1 has-text-white mb-5">Please enter a city:</h2>
+      <div class="control">
+        <input id="city-input" class="input px-4" type="text" placeholder="Type in a city" />
       </div>
-      <button class="modal-close is-large" aria-label="close"></button>
+      <div class="select is-fullwidth mt-3">
+        <select class="genre-input">
+          <option>Select a genre</option>
+          <option>Music</option>
+          <option>Comedy</option>
+          <option>Museum</option>
+          <option>Food</option>
+
+        </select>
+      </div>
+      <button id="submit-btn" class="modal-submit-btn button is-large is-primary mt-6 text-center">Submit</button>
+
     </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
 
-    <!---------First Open HTML------------>
-
+  <!---------First Open HTML------------>
+  <div class="is-flex is-flex-direction-column is-align-items-center">
     <div class="is-flex is-justify-content-center pt-6">
       <div class="box ">
         <h1 class="pb-4 pt-4" id="title">Rainy Day Parade</h1>
       </div>
     </div>
-    <div class="container is-flex is-justify-content-center">
-      <button class="button start-btn is-primary is-large js-modal-trigger" data-target="modal">Get Started!</button>
-    </div>
-    
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="./js/script.js"></script>
-  </body>
+    <button class="button start-btn is-primary is-medium js-modal-trigger has-text-white is-size-1"
+      data-target="modal">Get Started!</button>
+
+    <div>
+      
+    </div>
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="./js/script.js"></script>
+</body>
+
 </html>
