@@ -9,6 +9,7 @@
 
 html, body {
   height: 100%;
+  background-color: rgb(39, 39, 29)
 }
 
 img {
@@ -23,6 +24,7 @@ a {
 button {
   border: none;
   cursor: pointer;
+  
 }
 
 /* GLOBAL/REUSABLE CLASSES */
@@ -34,4 +36,43 @@ button {
 
 #title {
     font-size: 5rem !important;
+    
+}
+
+.start-btn{
+  margin-top: 10%;
+  padding: 3% 8% !important;
+  background-color: rgb(43, 181, 181) !important;
+}
+
+.modal {
+  max-width: 40%;
+  max-height: 40%;
+}
+
+.modal-submit-btn {
+  background-color: rgb(43, 181, 181) !important;
+}
+.hide {
+  display:none;
+}
+
+.box{
+  background: #fff;
+  font-family: Montserrat, sans-serif;;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: bold;
+  color: #009688;
+  padding: 40px;
+  box-shadow:
+	  inset #009688 0 0 0 5px, 
+    inset #059c8e 0 0 0 1px, 
+    inset #0cab9c 0 0 0 10px, 
+    inset #1fbdae 0 0 0 11px, 
+    inset #8ce9ff 0 0 0 16px, 
+    inset #48e4d6 0 0 0 17px, 
+    inset #e5f9f7 0 0 0 21px, 
+    inset #bfecf7 0 0 0 22px;
+  text-shadow: 3px 3px 1px #bfecf7;
 }
