@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
     <link href="./css/rdp.css">
     <title>Rainy Day Parade</title>
@@ -12,34 +11,59 @@
 
 <body>
     <!--NAVAGATION SECTION: INCLUDES THE BACK BUTTON-->
-    <nav>
-        <button>arrow back</button>
-        <p>Check out another city</p>
+    <nav class="navigation columns is-centered">
+        <div class="back-btn column is-narrow">
+            <button href="./index.html"></button>
+        </div>
+        <div class="column has-text-left " id="return-home"> <!-- Just want to move it slightly down-->
+            <a class ="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="index.html">Reselect City:</a>
+            
+        </div>
     </nav>
     <!--MAIN HEADER: INCLUDES DISPLAYED CHOSEN DESIRED CITY-->
-    <h1>Your Chosen City:</h1>
+    
+    <div class="columns is-centered box">
+        <div class="c-output">
+            <h1 class="has-text-centered">Your Chosen City: <span class="city-output"></span></h1>
+        </div>
+    </div>
+    
     <!--WEATHER REPORT:-->
-    <div>
-        <h2>Weather Report:</h2>
-        <p class="month-wr"></p>
+    <div class="container is-max-desktop py-4">
+        <div class="columns is-centered box">
+            <div class="column is-9">
+                <h2 class="has-text-centered">Weather Report:</h2>
+                <p class="weather-report"></p>
+            </div>
+        </div>
     </div>
     <!--THIS AREA WILL BE THE TICKETMASER OUTPUT FOR EVENTS BASED ON CHOSEN CRITERIA-->
-    <div class="containers">
-        <div>
-            <h2>Best events for you this week:</h2>
-            <p class="tm=output"></p>
-        </div>
-
-        <div>
-            <h2>Save these for next week:</h2>
-            <p class="tm=output"></p>
-        </div>
-
-        <div>
-            <h2>Only Indoor for this Month:</h2>
-            <p class="tm=output"></p>
+    <div class="container py-4">
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                <div class="box">
+                    <h2 class="has-text-centered">Best events for you this week:</h2>
+                    <p class="top-events"></p>
+                </div>
+            </div>
+            <div class="column is-one-third">
+                <div class="box">
+                    <h2 class="has-text-centered">Save these for next week:</h2>
+                    <p class="next-events"></p>
+                </div>
+            </div>
+            <div class="column is-one-third">
+                <div class="box">
+                    <h2 class="has-text-centered">Only Indoor for this Month:</h2>
+                    <p class="indoor-events"></p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer>
+
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
