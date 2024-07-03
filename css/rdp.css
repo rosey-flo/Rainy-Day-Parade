@@ -4,11 +4,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  color: #444;
 }
 
 html, body {
   height: 100%;
+}
+
+#return-home{
+  background-color:rgb(54, 62, 64);
+  color:rgb(250, 250, 250);
 }
 
 img {
@@ -17,7 +21,7 @@ img {
 
 a {
   text-decoration: none;
-  color: #333;
+  color: #099b8f;
 }
 
 button {
