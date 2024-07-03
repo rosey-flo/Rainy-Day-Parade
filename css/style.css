@@ -9,7 +9,7 @@
 
 html, body {
   height: 100%;
-  background-color: rgb(39, 39, 29)
+  background-color: lightgrey;
 }
 
 img {
@@ -39,14 +39,16 @@ button {
     
 }
 
+
 .start-btn{
-  margin-top: 10%;
-  padding: 3% 8% !important;
+  margin-top: 7%;
+  max-width: 25%;
+  padding: 2% 6% !important;
   background-color: rgb(43, 181, 181) !important;
 }
 
 .modal {
-  max-width: 40%;
+  max-width: 40% !important;
   max-height: 40%;
   position: fixed;
   top: 50%;
@@ -61,7 +63,8 @@ button {
   display:none;
 }
 
-.box{
+
+.box-title{
   background: #fff;
   font-family: Montserrat, sans-serif;;
   font-size: 24px;
