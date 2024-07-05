@@ -8,7 +8,9 @@ function getCityName () {
     if(cities.length > 0){
         const mostRecentCity = cities[cities.length -1].city;
         return mostRecentCity;
-    }    
+    } else {
+        return 'Jersey City';
+    }   
 }
 
 function outputCityName (city) {
