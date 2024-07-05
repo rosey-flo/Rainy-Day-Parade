@@ -60,12 +60,6 @@ $submitBtn.on('click', storeCity);
 
 
 
-
-
-
-
-
-
 $(document).ready(function() {
     // Functions to open and close a modal
     function openModal($el) {
