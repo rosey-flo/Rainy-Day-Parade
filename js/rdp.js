@@ -2,21 +2,21 @@
 const apiKeyW = '453e76b47d31a5d94e87e19b3143c6ec';
 
 
-function getCityName () {
+function getCityName() {
     const cities = JSON.parse(localStorage.getItem('cities')) || [];
-    
-    if(cities.length > 0){
-        const mostRecentCity = cities[cities.length -1].city;
+
+    if (cities.length > 0) {
+        const mostRecentCity = cities[cities.length - 1].city;
         return mostRecentCity;
     } else {
         return 'Jersey City';
-    }   
+    }
 }
 
-function outputCityName (city) {
+function outputCityName(city) {
     city = getCityName();
     const $cityOutput = $('.city-output');
-    
+
     $cityOutput.html(`
         <p>${city}</p>
         `)
@@ -27,7 +27,7 @@ function outputCityName (city) {
 function getCurrentweather() {
     const city = getCityName();
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyW}&units=imperial`;
-    
+
     return $.get(url);
 
 }
@@ -35,30 +35,30 @@ function getCurrentweather() {
 function outputCurrentWeather(currentData) {
     const $currentOutput = $('.weather-report');
     console.log(currentData);
-    
+
     $currentOutput.html(`
             <p>Current Temp: ${currentData.main.temp}</p>
             <p>Conditions: ${currentData.weather[0].description}</p>
             <img src="https://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="weather icon image">
         `);
-        
-        return currentData.coord;
+
+    return currentData.coord;
 }
 
-function getWeatherForcast (cityCoord) {
-    
+function getWeatherForcast(cityCoord) {
+
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityCoord.lat}&lon=${cityCoord.lon}&appid=${apiKeyW}&units=imperial`;
 
-    
+
     return $.get(url);
 }
 
 
-function outputWeatherForcast (forcastData) {
+function outputWeatherForcast(forcastData) {
     const $forcastOutput = $('.weather-report');
-    
+
     const filtered = forcastData.list.filter(function (forcastObj) {
-        if(forcastObj.dt_txt.includes('12')) return true;
+        if (forcastObj.dt_txt.includes('12')) return true;
     });
 
     filtered.forEach(function (forcastObj) {
@@ -84,16 +84,9 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
 //================MUSIC GENRE ID 1 WEEK ==============//
 
-
-
-
+/*
 const Mgenre = 'music';
 const apiKeyT = `qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk`;
 
@@ -125,151 +118,118 @@ function getEventData(weekData) {
  }
         
 
-getEventData()
-  .then(outputWeekEvents);
+ getEventData()
+.then(outputWeekEvents);
+
+  //--------------------------------TWO WEEKS EVENTS
 
 
+function getSecondEventData(secondweekData) {
+    
+    const secondURL = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=2024-07-12T13:52:00Z&endDateTime=2024-07-18T13:53:00Z&classificationName=${Mgenre}`;
+    
+    return $.get(secondURL);
 
-
-
-
-    /*
-;   // Fetch d/*a from the API
-    fetch(firsturl)
-        .then(response => {
-            if (
-            //validity!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Extract event information
-            const events = data._embedded.events;
-
-            // Create HTML to display events
-            let eventHTML = '';
-            events.forEach(event => {
-                eventHTML += `
-                    <div class="event-item">
-                        <h2>${event.name}</h2>
-                        <p>Date: ${event.dates.start.localDate}</p>
-                        <p>Time: ${event.dates.start.localTime}</p>
-                        <p>Venue: ${event._embedded.venues[0].name}</p>
-                    </div>
-                `;
-            });
-
-            // Display events in the top-events section
-            $('.top-events').html(eventHTML);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
 }
 
-// Call fetchEventData() when the page loads
-$(document).ready(function() {
-    fetchEventData();
-});
-
-function fetchEventData() {
-    const apiKeyT = `qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk`;
+ function outputSecondWeekEvents (secondEventData) {
+    const $secondEventOutput = $('.next-events');
+    const allEvents = secondEventData._embedded.events;
     
-    // Ticketmaster API endpoint for events discovery
-    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=2024-07-04T13:52:00Z&endDateTime=2024-07-31T13:53:00Z&classificationName=music`;
 
-//================MUSIC GENRE ID 2 WEEKS ==============//
+    //let weekEventsOutput = .innerHTML 
+        allEvents.forEach(function(eventObj){
+            $secondEventOutput.append(`
+                <h2>Event Name: ${eventObj.name}</h2>
+                <h2>Event Date: ${eventObj.dates.start.localDate}</h2>
+                <h2>Event Time: ${eventObj.dates.start.localTime}</h2>
 
-    // Fetch data from the API
 
-    const secondurl = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=2024-07-12T13:52:00Z&endDateTime=2024-07-18T13:53:00Z&classificationName=music`;
-   
-
-    fetch(secondurl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Extract event information
-            const events = data._embedded.events;
-
-            // Create HTML to display events
-            let eventHTML = '';
-            events.forEach(event => {
-                eventHTML += `
-                    <div class="event-item">
-                        <h2>${event.name}</h2>
-                        <p>Date: ${event.dates.start.localDate}</p>
-                        <p>Time: ${event.dates.start.localTime}</p>
-                        <p>Venue: ${event._embedded.venues[0].name}</p>
-                    </div>
-                `;
-            });
-
-            // Display events in the next-events section
-            $('.next-events').html(eventHTML);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
+                 <aside class="separate-line"></aside>
+                 `)
         });
+             
+ }
+        
+
+getSecondEventData()
+.then(outputSecondWeekEvents);
+
+
+
+  //--------------------------MONTH EVENTS
+
+
+
+function getMonthEventData(monthEventData) {
+    
+    const monthURL = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=2024-07-19T13:52:00Z&endDateTime=2024-07-31T13:53:00Z&page=3&classificationName=${Mgenre}`;
+    
+    return $.get(monthURL);
+
 }
 
-// Call fetchEventData() when the page loads
-$(document).ready(function() {
-    fetchEventData();
-});
+ function outputMonthEvents (monthEventData) {
+    const $secondeventOutput = $('.indoor-events');
+    const allEvents = monthEventData._embedded.events;
 
-//================MUSIC GENRE ID MONTH==============//
+    //let weekEventsOutput = .innerHTML 
+        allEvents.forEach(function(eventObj){
+            $secondeventOutput.append(`
+                <h2>Event Name: ${eventObj.name}</h2>
+                <h2>Event Date: ${eventObj.dates.start.localDate}</h2>
+                <h2>Event Time: ${eventObj.dates.start.localTime}</h2>
 
-function fetchEventData() {
-    const apiKeyT = `qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk`;
-    
-    // Ticketmaster API endpoint for events discovery
-    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=2024-07-04T13:52:00Z&endDateTime=2024-07-31T13:53:00Z&classificationName=music`;
 
-    
-
-    //https://app.ticketmaster.com/discovery/v2/events?apikey=qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk&locale=*&startDateTime=2024-07-19T13:52:00Z&endDateTime=2024-07-31T13:53:00Z&page=3&classificationName=music
-
-    // Fetch data from the API
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Extract event information
-            const events = data._embedded.events;
-
-            // Create HTML to display events
-            let eventHTML = '';
-            events.forEach(event => {
-                eventHTML += `
-                    <div class="event-item">
-                        <h2>${event.name}</h2>
-                        <p>Date: ${event.dates.start.localDate}</p>
-                        <p>Time: ${event.dates.start.localTime}</p>
-                        <p>Venue: ${event._embedded.venues[0].name}</p>
-                    </div>
-                `;
-            });
-
-            // Display events in the indoor-events section
-            $('.indoor-events').html(eventHTML);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
+                 <aside class="separate-line"></aside>
+                 `)
         });
-}
+             
+ }
+        
 
-// Call fetchEventData() when the page loads
-$(document).ready(function() {
-    fetchEventData();
-});
+ getMonthEventData()
+   .then(outputMonthEvents);
+
 */
+
+
+const apiKeyT = `qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk`;
+const Mgenre = 'music';
+
+// Function to fetch event data
+function getEventData(startDateTime, endDateTime) {
+    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=${startDateTime}&endDateTime=${endDateTime}&classificationName=${Mgenre}`;
+    return $.get(url);
+}
+
+// Function to output events with a limit of 10
+function outputEvents(eventData, outputSelector) {
+    const $eventOutput = $(outputSelector);
+    const allEvents = eventData._embedded.events.slice(0, 10); // Limit to first 10 events
+
+    allEvents.forEach(function(eventObj) {
+        $eventOutput.append(`
+            <h2>Event Name: ${eventObj.name}</h2>
+            <h2>Event Date: ${eventObj.dates.start.localDate}</h2>
+            <h2>Event Time: ${eventObj.dates.start.localTime}</h2>
+            <aside class="separate-line"></aside>
+        `);
+    });
+}
+
+// Fetch and output events for different time frames with a limit of 10
+getEventData('2024-07-04T13:52:00Z', '2024-07-11T13:53:00Z')
+    .then(function(eventData) {
+        outputEvents(eventData, '.top-events');
+    });
+
+getEventData('2024-07-12T13:52:00Z', '2024-07-18T13:53:00Z')
+    .then(function(eventData) {
+        outputEvents(eventData, '.next-events');
+    });
+
+getEventData('2024-07-19T13:52:00Z', '2024-07-31T13:53:00Z&page=3')
+    .then(function(eventData) {
+        outputEvents(eventData, '.indoor-events');
+    });
