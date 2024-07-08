@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -6,16 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rainy Day Parade</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/black-tie/jquery-ui.css">
   <link rel="stylesheet" href="./css/style.css">
 
 </head>
 
-<body>
-  
- 
-
-  
-
+<body data-theme="dark">
   <!---------First Open HTML------------>
   <div class="is-flex is-flex-direction-column is-align-items-center">
     <div class="is-flex is-justify-content-center pt-6">
@@ -24,21 +21,20 @@
       </div>
     </div>
 
-    <button class="button start-btn is-primary is-medium js-modal-trigger has-text-white is-size-1"
+    <button class="button start-btn is-primary is-large js-modal-trigger has-text-white is-responsive"
       data-target="modal">Get Started!</button>
 
        <!-----Modal HTML------>
-       <div>
         <div class="modal text-center box" id="modal">
           <div class="modal-background"></div>
-          <div class="modal-content is-flex is-flex-direction-column">
+          <div class="modal-content is-flex is-flex-direction-column is-fullwidth">
             <!-- Any other Bulma elements you want -->
-            <h2 class="modal-title is-size-1 has-text-white mb-5">Please enter a city:</h2>
+            <h2 class="modal-title has-text-white mb-5">Please enter a city:</h2>
             <div class="control">
               <input id="city-input" class="input px-4" type="text" placeholder="Type in a city" />
             </div>
             <div class="select is-fullwidth mt-3">
-              <select class="genre-input">
+              <select class="genre-input"><!--Dropdown-->
                 <option>Select a genre</option>
                 <option value="music">Music</option>
                 <option value="comedy">Comedy</option>
@@ -46,16 +42,58 @@
                 <option value="food">Food</option>
               </select>
             </div>
-            <button id="submit-btn" class="modal-submit-btn button is-large is-primary mt-6 text-center">Submit</button>
+            <div class="control">
+              <input type="text" id="start-date" class="input" placeholder="Select Start Date of Range">
+              <input type="text" id="end-date" class="input" placeholder="Select End Date of Range">
+
+            </div>
+            <button id="submit-btn" class="modal-submit-btn button is-primary mt-6 text-center">Submit</button>
           </div>
           <button class="modal-close is-large" aria-label="close"></button>
         </div>
-      </div>
-
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js" integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
   <script src="./js/script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
 
 </html>
