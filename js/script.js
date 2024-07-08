@@ -1,4 +1,3 @@
-
 const $submitBtn = $('#submit-btn');
 
 function getCities () {
@@ -84,5 +83,3 @@ $(document).on('keydown', function(event) {
   if(event.key === "Escape") {
     closeAllModals();
   }
-});
-
