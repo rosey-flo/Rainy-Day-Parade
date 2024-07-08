@@ -9,7 +9,9 @@
     <title>Rainy Day Parade</title>
 </head>
 
+<body>
 <body class="has-background-primary" data-theme="dark">
+
     <!--NAVAGATION SECTION: INCLUDES THE BACK BUTTON-->
     <nav class="navigation columns is-centered">
         <div class="back-btn column is-narrow">
@@ -21,7 +23,7 @@
     </nav>
     <!--MAIN HEADER: INCLUDES DISPLAYED CHOSEN DESIRED CITY-->
     
-    <div class="columns is-centered box">
+    <div class="columns is-centered box" id="chosen-box">
         <div class="c-output">
             <h1 class="has-text-centered has-text-white">Your Chosen City: <span class="city-output"></span></h1>
         </div>
@@ -31,8 +33,11 @@
     <div class="container py-4">
         <div class="columns is-centered box">
             <div class="column is-9">
-                <h2 class="has-text-centered has-text-white">Weather Report:</h2>
-                <p class="weather-report has-text-white"></p>
+                <h2 class="has-text-centered has-text-white">Weather Report</h2>
+                <h3>Current Weather:</h3>
+                <div class="current-report has-text-white"></div>
+                <h3 class="mb-2">5 Day ForeCast:</h3>
+                <div class="weather-report has-text-white grid"></div>
             </div>
         </div>
     </div>
@@ -71,8 +76,10 @@
 
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js" integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
     <script src="./js/rdp.js"></script>
 </body>
 
