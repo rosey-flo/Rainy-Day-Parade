@@ -33,7 +33,7 @@ function getCurrentweather() {
 }
 
 function outputCurrentWeather(currentData) {
-    const $currentOutput = $('.weather-report');
+    const $currentOutput = $('.current-report');
     const cityName = currentData.name; // Retrieve city name from currentData
     console.log(cityName); // Log the city name for verification
 
@@ -59,12 +59,12 @@ function outputWeatherForcast(forcastData) {
     const $forcastOutput = $('.weather-report');
 
     const filtered = forcastData.list.filter(function (forcastObj) {
-        if (forcastObj.dt_txt.includes('12')) return true;
+        if (forcastObj.dt_txt.includes('12:00')) return true;
     });
-
+console.log(filtered)
     filtered.forEach(function (forcastObj) {
         $forcastOutput.append(`
-                <div>
+                <div class="cell">
                     <h2>${forcastObj.dt_txt}</h2>
                     <h3>Temp: ${forcastObj.main.temp}</h3>
                     <img src="https://openweathermap.org/img/wn/${forcastObj.weather[0].icon}@2x.png" alt="weather icon image">
@@ -87,66 +87,77 @@ $(document).ready(function () {
 //=============================ticketmaster API CALL================================
 
 
-const apiKeyT = `qKWzXfaxaHnvqJQfnyFKmzJ8AjfSh2qk`;
+const apiKeyT = `6u8xMx7g5bxawimcRO173VA4aimxbY63`;
 
+let selectedGenre = '';
 
-$(document).ready(function () {
-    let selectedGenre = '';
+// Function to handle modal submit
+$('#submit-btn').on('click', function () {
+    selectedGenre = $('.genre-input').val();
+    console.log('Selected genre:', selectedGenre);
 
-    // Function to handle modal submit
-    $('#submit-btn').on('click', function () {
-        selectedGenre = $('.genre-input').val();
-        console.log('Selected genre:', selectedGenre);
+})
 
-    })
+function getCityName() {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
 
-    function getCityName() {
-        const cities = JSON.parse(localStorage.getItem('cities')) || [];
-
-        if (cities.length > 0) {
-            const mostRecentCity = cities[cities.length - 1].city;
-            return mostRecentCity;
-        } else {
-            return 'Jersey City';
-        }
+    if (cities.length > 0) {
+        const mostRecentCity = cities[cities.length - 1].city;
+        return mostRecentCity;
+    } else {
+        return 'Jersey City';
     }
+}
 
 
-    // Function to fetch event data
-    function getEventData(startDateTime, endDateTime) {
-        const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=${startDateTime}&endDateTime=${endDateTime}&city=${getCityName()}&classificationName=${selectedGenre}`;
-        return $.get(url);
-    }
+// Function to fetch event data
+function getEventData(startDateTime, endDateTime) {
+    const city = localStorage.getItem('city')
+    const genre = localStorage.getItem('genre')
+    
+    const url = `https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKeyT}&locale=*&startDateTime=${startDateTime}&endDateTime=${endDateTime}&city=${city}&classificationName=${genre}`;
+    return $.get(url);
+}
 
-    // Function to output events with a limit of 10
-    function outputEvents(eventData, outputSelector) {
-        const $eventOutput = $(outputSelector);
-        const allEvents = eventData._embedded.events.slice(0, 10); // Limit to first 10 events
-
-        allEvents.forEach(function (eventObj) {
+// Function to output events with a limit of 10
+function outputEvents(eventData, outputSelector) {
+    const $eventOutput = $(outputSelector);
+    const allEvents = eventData._embedded?.events 
+   
+    if (allEvents){
+        const sortedEvents = allEvents.sort(function(eventA, eventB){
+       
+            return dayjs(eventA.dates.start.dateTime).valueOf() - dayjs(eventB.dates.start.dateTime).valueOf()
+        })
+    
+        sortedEvents.forEach(function (eventObj) {
+            // const militaryTime = eventObj.dates.start.localTime;
+            // const standardTime = militaryToStandardTime(militaryTime);
+            const date = dayjs(eventObj.dates.start.dateTime)
+    
             $eventOutput.append(`
-            <h2>Event Name: ${eventObj.name}</h2>
-            <h2>Event Date: ${eventObj.dates.start.localDate}</h2>
-            <h2>Event Time: ${eventObj.dates.start.localTime}</h2>
-            <aside class="separate-line"></aside>
-        `);
+                <h2>Event Name: ${eventObj.name}</h2>
+                <h2>Event Date: ${date.format('MMMM DD, YYYY')}</h2>
+                <h2>Event Time: ${date.format('hh:mm a')}</h2>
+                <aside class="separate-line"></aside>
+            `);
         });
+    }   else {
+        $eventOutput.html('<h2>No Events Found Within That Range</h2>')
     }
 
-    // Fetch and output events for different time frames with a limit of 10
-    getEventData('2024-07-04T13:52:00Z', '2024-07-11T13:53:00Z')
-        .then(function (eventData) {
-            outputEvents(eventData, '.top-events');
-        });
+    
+}
 
-    getEventData('2024-07-12T13:52:00Z', '2024-07-18T13:53:00Z')
-        .then(function (eventData) {
-            outputEvents(eventData, '.next-events');
-        });
+const startDate = new Date(localStorage.getItem('start-date'));
+const endDate = new Date(localStorage.getItem('end-date'));
 
-    getEventData('2024-07-19T13:52:00Z', '2024-07-31T13:53:00Z&page=3')
-        .then(function (eventData) {
-            outputEvents(eventData, '.indoor-events');
-        });
+const start = dayjs(startDate).format('YYYY-MM-DDTHH:mm:ss');
+const end = dayjs(endDate).format('YYYY-MM-DDTHH:mm:ss');
 
-});
+// Fetch and output events for different time frames with a limit of 10
+getEventData(start + 'Z', end + 'Z')
+    .then(function (eventData) {
+        outputEvents(eventData, '.top-events');
+    });
+
