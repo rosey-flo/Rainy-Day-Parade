@@ -135,9 +135,9 @@ function outputEvents(eventData, outputSelector) {
             const date = dayjs(eventObj.dates.start.dateTime)
     
             $eventOutput.append(`
-                <h2>Event Name: ${eventObj.name}</h2>
-                <h2>Event Date: ${date.format('MMMM DD, YYYY')}</h2>
-                <h2>Event Time: ${date.format('hh:mm a')}</h2>
+                <h2 class="mt-2" >Event Name: ${eventObj.name}</h2>
+                <h2 class="my-2">Event Date: ${date.format('MMMM DD, YYYY')}</h2>
+                <h2 class="mb-2">Event Time: ${date.format('hh:mm a')}</h2>
                 <aside class="separate-line"></aside>
             `);
         });
