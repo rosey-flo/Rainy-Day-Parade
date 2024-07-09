@@ -2,18 +2,12 @@ const apiKeyW = '453e76b47d31a5d94e87e19b3143c6ec';
 
 
 function getCityName() {
-    const cities = JSON.parse(localStorage.getItem('cities')) || [];
-
-    if (cities.length > 0) {
-        const mostRecentCity = cities[cities.length - 1].city;
-        return mostRecentCity;
-    } else {
-        return 'Jersey City';
-    }
+    const city = localStorage.getItem('city');
+    return city;
 }
 
-function outputCityName(city) {
-    city = getCityName();
+function outputCityName() {
+    const city = getCityName();
     const $cityOutput = $('.city-output');
 
     $cityOutput.html(`
@@ -96,17 +90,6 @@ $('#submit-btn').on('click', function () {
     console.log('Selected genre:', selectedGenre);
 
 })
-
-function getCityName() {
-    const cities = JSON.parse(localStorage.getItem('cities')) || [];
-
-    if (cities.length > 0) {
-        const mostRecentCity = cities[cities.length - 1].city;
-        return mostRecentCity;
-    } else {
-        return 'Jersey City';
-    }
-}
 
 
 // Function to fetch event data

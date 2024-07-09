@@ -1,7 +1,7 @@
 const $submitBtn = $('#submit-btn');
 
 function getCities () {
-    const cities = JSON.parse(localStorage.getItem('cities')) || [];
+    const cities = JSON.parse(localStorage.getItem('city')) || [];
     return cities;
 }
 
